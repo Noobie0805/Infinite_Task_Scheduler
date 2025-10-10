@@ -17,30 +17,74 @@ Tasks are persisted in a PostgreSQL database with recurring logic and exception 
 
 ---
 
-## Folder Structure
+## 📂 Folder Structure
 
-project-root/
+```
+DilSayCare_Assignment/
 │
-├── README.md # main overview
+├── README.md                    # Main project overview
+├── .env                         # Environment variables (gitignored)
 │
-├── backend/ # Node.js + Express + PostgreSQL
-│ ├── README.md
-│ └── src/
+├── backend/                     # Node.js + Express + PostgreSQL
+│   ├── README.md               # Backend documentation
+│   ├── package.json            # Backend dependencies
+│   ├── tsconfig.json           # TypeScript configuration
+│   ├── nodemon.json            # Development server config
+│   ├── .gitignore              # Backend git ignore rules
+│   ├── dist/                   # Compiled TypeScript output
+│   └── src/
+│       ├── app.ts              # Main application entry
+│       ├── db/
+│       │   └── index.ts        # Database connection
+│       ├── routes/             # API route definitions
+│       ├── controllers/        # Business logic handlers
+│       ├── middlewares/        # Custom middleware
+│       └── utils/              # Utility functions
 │
-└── frontend/ # React + TypeScript (Vercel)
-├── README.md
-└── src/
-
+└── frontend/                    # React + TypeScript (Vercel)
+    ├── README.md               # Frontend documentation
+    ├── package.json            # Frontend dependencies
+    ├── tsconfig.json           # TypeScript configuration
+    ├── tailwind.config.js      # Tailwind CSS configuration
+    ├── vite.config.ts          # Vite build configuration
+    ├── dist/                   # Build output
+    └── src/
+        ├── App.tsx             # Main React component
+        ├── main.tsx            # React entry point
+        ├── App.css             # Global styles
+        ├── components/         # Reusable UI components
+        │   ├── TopSection/
+        │   ├── WeekdaysBar/
+        │   ├── FooterSection/
+        │   └── TimerSlots/
+        ├── pages/              # Page components
+        │   ├── Home/
+        │   └── Schedule/
+        └── utils/              # Frontend utility functions
+            └── getWeek.ts      # Week calculation logic
+```
 
 ---
 
-## Features
+## 🚀 Features
 
-1. Infinite horizontal scroll for weekly view
-2. Recurring task logic handled at backend
-3. Exception-based updates/deletes
-4. Two time slots per weekday max
-5. Responsive React UI
+1. **Infinite Horizontal Scroll** - Navigate through weeks seamlessly
+2. **Recurring Task Logic** - Backend handles weekly pattern management
+3. **Exception Handling** - Override specific dates without affecting patterns
+4. **Two Slots Per Day** - Maximum flexibility with time management
+5. **Responsive UI** - Works on desktop and mobile devices
+6. 
+---
 
-## Author 
-Sarvjeet kumar# Infinite_Task_Scheduler
+## 🌐 Live Demo
+
+- **Frontend**: [Deployed on Vercel](your-vercel-url)
+- **Backend API**: [Deployed on Render](your-render-url)
+
+---
+
+## 👤 Author 
+
+**Sarvjeet Kumar**  
+
+---
