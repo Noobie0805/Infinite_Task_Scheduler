@@ -73,7 +73,7 @@ DilSayCare_Assignment/
 3. **Exception Handling** - Override specific dates without affecting patterns
 4. **Two Slots Per Day** - Maximum flexibility with time management
 5. **Responsive UI** - Works on desktop and mobile devices
-6. 
+
 ---
 
 ## 👤 Author 
