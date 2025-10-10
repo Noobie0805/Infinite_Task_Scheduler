@@ -76,13 +76,6 @@ DilSayCare_Assignment/
 6. 
 ---
 
-## 🌐 Live Demo
-
-- **Frontend**: [Deployed on Vercel](your-vercel-url)
-- **Backend API**: [Deployed on Render](your-render-url)
-
----
-
 ## 👤 Author 
 
 **Sarvjeet Kumar**  
