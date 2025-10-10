@@ -8,8 +8,8 @@ let pool: InstanceType<typeof Pool>;
 const connectDB = async () => {
     try {
         pool = new Pool({
-            connectionString: process.env.DB_EXTERNAL_URL,
-            ssl: { rejectUnauthorized: false } 
+            connectionString: process.env.DB_INTERNAL_URL,
+            ssl: { rejectUnauthorized: false }
         });
 
         const client = await pool.connect();
