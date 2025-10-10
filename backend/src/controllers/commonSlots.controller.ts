@@ -15,13 +15,9 @@ export const createCommonTask = async (
         if (weekday === undefined || !start_time || !end_time || slot === undefined) {
             throw new ApiError(400, "Missing required fields: weekday, start_time, end_time, slot");
         }
-
-        // Validate slot range
         if (slot < 1 || slot > 2) {
             throw new ApiError(400, "Slot must be 1 or 2");
         }
-
-        // Validate slot assignment
         await validateCommonTaskSlot(weekday, slot, start_time, end_time);
 
         const result = await pool.query(
@@ -80,7 +76,6 @@ export const getEffectiveSlots = async (
             throw new ApiError(400, "Missing required query param: date");
         }
 
-        // Validate date format
         if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
             throw new ApiError(400, "date must be YYYY-MM-DD");
         }

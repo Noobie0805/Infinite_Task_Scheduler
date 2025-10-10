@@ -41,7 +41,7 @@ export const createExceptionTask = async (
             if (existingException.rows.length > 0) {
                 result = await pool.query(
                     `UPDATE exception_tasks 
-                     SET common_tasks_id = $1, status = $2, start_time = $3, end_time = $4, updated_at = CURRENT_TIMESTAMP
+                     SET common_tasks_id = $1, status = $2, start_time = $3, end_time = $4
                      WHERE slot_date = $5 AND slot = $6 
                      RETURNING *`,
                     [common_tasks_id ?? null, status, start_time ?? null, end_time ?? null, slot_date, slot]

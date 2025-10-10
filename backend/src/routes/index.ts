@@ -5,12 +5,10 @@ import { validateCreateCommonTask, validateCreateExceptionTask } from '../middle
 
 const router = Router();
 
-// Common tasks routes
 router.post('/api/create-common-tasks', validateCreateCommonTask, createCommonTask);
 router.get('/api/get-common-tasks', getCommonTasks);
 router.get('/api/get-effective-slots', getEffectiveSlots);
 
-// Exception tasks routes
 router.post('/api/create-exception-tasks', validateCreateExceptionTask, createExceptionTask);
 router.get('/api/get-exception-tasks', getExceptionTasksByDate);
 

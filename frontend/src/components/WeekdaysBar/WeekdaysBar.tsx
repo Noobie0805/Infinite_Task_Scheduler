@@ -6,6 +6,7 @@ import { TimerSlots } from "./TimerSlots/TimerSlots";
 import { Api } from "../../utils/api";
 import type { CommonTask, ExceptionTask } from "../../types/api";
 
+
 const WeekDaysBar: React.FC = () => {
   const today = new Date();
   const [currentDate, setCurrentDate] = useState(today);
@@ -14,6 +15,7 @@ const WeekDaysBar: React.FC = () => {
   const weekWidthRef = useRef<number>(0);
   const [switchMonthBox, setSwitchMonthBox] = useState(false);
   const [currentWeekIndex, setCurrentWeekIndex] = useState(0);
+
 
   const monthMap = [
     "January", "February", "March", "April", "May", "June",
@@ -134,11 +136,36 @@ const WeekDaysBar: React.FC = () => {
     const handler = async () => {
       const entries = Object.entries(editedByDate);
       for (const [date, slots] of entries) {
-        if (slots.length === 0 || (slots.length === 1 && slots[0].start === "00:00" && slots[0].end === "00:00")) {
-          await Api.createExceptionTask({ slot_date: date, status: 'deleted', common_tasks_id: null });
-        } else {
-          for (const s of slots) {
-            await Api.createExceptionTask({ slot_date: date, status: 'updated', start_time: s.start, end_time: s.end, common_tasks_id: null });
+        const d = new Date(date);
+        const weekday = d.getDay();
+        const baseForWeekday = commonByWeekday[weekday] || [];
+
+        const s1 = slots[0] || { start: "00:00", end: "00:00" };
+        const s2 = slots[1] || { start: "00:00", end: "00:00" };
+
+        const isZero = (s: { start: string; end: string }) => s.start === "00:00" && s.end === "00:00";
+
+        for (let idx = 0; idx < 2; idx++) {
+          const edited = idx === 0 ? s1 : s2;
+          const slotNumber = idx + 1;
+          const base = baseForWeekday[idx]; 
+
+          if (isZero(edited)) {
+            if (base) {
+              await Api.createExceptionTask({ slot_date: date, status: 'deleted', slot: slotNumber, common_tasks_id: null } as any);
+            }
+            continue;
+          }
+
+          if (!base) {
+            await Api.createCommonTask({ weekday, slot: slotNumber, start_time: edited.start, end_time: edited.end });
+            continue;
+          }
+
+          const baseStart = (base.start_time || "").slice(0, 5);
+          const baseEnd = (base.end_time || "").slice(0, 5);
+          if (edited.start !== baseStart || edited.end !== baseEnd) {
+            await Api.createExceptionTask({ slot_date: date, status: 'updated', slot: slotNumber, start_time: edited.start, end_time: edited.end, common_tasks_id: null } as any);
           }
         }
       }
@@ -173,16 +200,13 @@ const WeekDaysBar: React.FC = () => {
     return weeks[currentWeekIndex] || weeks[0];
   };
 
-  // Emit overall validity to control Save button
   useEffect(() => {
-    // validate editedByDate: each slot must have start<end and non-overlapping if two slots
     let valid = true;
     for (const slots of Object.values(editedByDate)) {
       if (slots.length >= 1 && slots[0].end !== "00:00" && slots[0].end <= slots[0].start) valid = false;
       if (slots.length >= 2) {
         const s1 = slots[0], s2 = slots[1];
         if (s2.end !== "00:00" && s2.end <= s2.start) valid = false;
-        // basic overlap check
         if (s1.start < s2.end && s2.start < s1.end) valid = false;
       }
       if (!valid) break;
@@ -230,7 +254,6 @@ const WeekDaysBar: React.FC = () => {
         ))}
       </div>
 
-      {/* Month selector */}
       <div className="flex items-center justify-end px-5 py-2 pb-5 relative border-b-[2.5px]">
         <span className="flex items-center whitespace-nowrap cursor-pointer select-none" onClick={() => setSwitchMonthBox(!switchMonthBox)}>
           {monthMap[currentDate.getMonth()]}, {currentDate.getFullYear()}

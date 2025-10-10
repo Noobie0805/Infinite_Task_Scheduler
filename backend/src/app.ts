@@ -36,7 +36,6 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-// Graceful shutdown
 const shutdown = async () => {
   console.log('Shutting down server...');
   await closeDB();

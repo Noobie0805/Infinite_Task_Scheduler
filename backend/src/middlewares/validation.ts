@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import { ApiError } from "../utils/ApiError.utils.js";
 
 function parseTimeToSeconds(time: string): number | null {
-    // Accept HH:MM or HH:MM:SS
+    //  HH:MM or HH:MM:SS dono...
     const match = /^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(time);
     if (!match) return null;
     const hours = Number(match[1]);
@@ -62,18 +62,19 @@ export const validateCreateExceptionTask = (
         return next(new ApiError(400, "status must be 'updated' or 'deleted'"));
     }
 
-    // Basic date format YYYY-MM-DD
+    // apna basic date format YYYY-MM-DD
     if (!/^\d{4}-\d{2}-\d{2}$/.test(slot_date)) {
         return next(new ApiError(400, "slot_date must be YYYY-MM-DD"));
     }
 
     if (status === 'deleted') {
-        // Allow deleting entire day's slots without referencing a specific common_tasks_id
+        // slotwise selete ..slot number ke hisaab se..
+        if (slot === undefined || typeof slot !== "number" || !Number.isInteger(slot) || slot < 1 || slot > 2) {
+            return next(new ApiError(400, "slot must be an integer between 1 and 2 for deleted status"));
+        }
         return next();
     }
 
-    // status === 'updated'
-    // Allow updated entries without specific common_tasks_id; backend will store null
     if (start_time === undefined || end_time === undefined || slot === undefined) {
         return next(new ApiError(400, "start_time, end_time, and slot are required for updated status"));
     }
