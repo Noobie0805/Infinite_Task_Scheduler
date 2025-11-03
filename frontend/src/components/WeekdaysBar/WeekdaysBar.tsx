@@ -241,8 +241,8 @@ const WeekDaysBar: React.FC = () => {
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 300, damping: 15 }}
                   className={`flex flex-col items-center p-2 min-w-[39px] rounded-lg cursor-pointer select-none
-                    ${!isCurrentMonth || isPast ? "text-gray-400" : "text-black"}
-                    ${isToday ? "bg-[#5A5AF1] text-white shadow-md" : "hover:bg-gray-100"}
+                    ${!isCurrentMonth || isPast ? "text-gray-600" : "text-white"}
+                    ${isToday ? "bg-[#5A5AF1] text-white shadow-md" : "hover:bg-gray-400"}
                   `}
                 >
                   <span>{day.day[0]}</span>

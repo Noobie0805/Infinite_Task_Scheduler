@@ -68,7 +68,7 @@ const TimerSlots: React.FC<TimerSlotsProps> = ({ slots, onChange }) => {
                             setSlot1(next);
                             emitChange(next, slot2, showSlot2);
                         }}
-                        className="p-1 outline-none border-r border-gray-300 text-[15.5px]"
+                        className="p-1 outline-none border-r border-gray-300 text-[15.5px] text-black"
                     />
                     <input
                         type="time"
@@ -78,7 +78,7 @@ const TimerSlots: React.FC<TimerSlotsProps> = ({ slots, onChange }) => {
                             setSlot1(next);
                             emitChange(next, slot2, showSlot2);
                         }}
-                        className="p-1 outline-none text-[16px]"
+                        className="p-1 outline-none text-[16px] text-black"
                     />
                 </div>
 

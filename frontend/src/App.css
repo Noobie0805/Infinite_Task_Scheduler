@@ -1,3 +1,4 @@
+/* App.css */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
@@ -6,3 +7,20 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+::selection {
+    background-color: white;
+    color: black;
+}
+
+/* ✅ Apply black background only to body, not all elements */
+body {
+    background-color: black;
+    color: white;
+}
+
+/* ✅ Style specific components instead of using * */
+/* .dark-theme {
+    background-color: black;
+    color: white;
+} */
