@@ -3,14 +3,14 @@ import './App.css';
 import TopSection from './components/TopSection/TopSection';
 import FooterSection from './components/FooterSection/FooterSection';
 import WeekDaysBar from './components/WeekdaysBar/WeekdaysBar';
-import backgroundImg from './assets/images/27230.jpg'; // ✅ Import the image
+import backgroundImg from './assets/images/27230.jpg';
 
 function App() {
   return (
     <>
       {/* Blurred background */}
       <div className='fixed inset-0 w-full h-full -z-10' style={{
-        backgroundImage: `url(${backgroundImg})`, // ✅ Use imported image
+        backgroundImage: `url(${backgroundImg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',

@@ -1,14 +1,19 @@
 import pkg from 'pg';
 const { Pool } = pkg;
-import dotenv from 'dotenv';
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
+
+if (process.env.NODE_ENV !== 'production') {
+    const dotenv = await import('dotenv');
+    dotenv.config();
+}
 
 let pool: InstanceType<typeof Pool>;
 
 const connectDB = async () => {
     try {
         pool = new Pool({
-            connectionString: process.env.DB_INTERNAL_URL,
+            connectionString: process.env.DATABASE_URL,
             ssl: { rejectUnauthorized: false }
         });
 
